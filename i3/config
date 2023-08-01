@@ -188,3 +188,6 @@ bindsym $mod+r mode "resize"
 bar {
         status_command i3status
 }
+
+# Nikan's Personal Stuff
+bindsym $mod+shift+x exec i3lock 
