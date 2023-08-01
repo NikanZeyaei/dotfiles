@@ -13,7 +13,7 @@ set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font pango:monospace 8
+font pango:monospace 10
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
@@ -190,4 +190,7 @@ bar {
 }
 
 # Nikan's Personal Stuff
-bindsym $mod+shift+x exec i3lock 
+bindsym $mod+shift+x exec i3lock
+exec_always setxkbmap -layout us,ir
+exec_always setxkbmap 'grp:alt_shift_toggle'
+
