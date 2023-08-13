@@ -83,6 +83,7 @@ plugins=(
 	zsh-syntax-highlighting
 	zsh-vi-mode
 	sudo
+	jsontools
 )
 
 source $ZSH/oh-my-zsh.sh
