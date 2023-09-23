@@ -1,3 +1,9 @@
 [submodule "kickstart.nvim"]
 	path = kickstart.nvim
 	url = https://github.com/nikanzeyaei/kickstart.nvim
+[submodule "init.lua"]
+	path = init.lua
+	url = https://github.com/nikanzeyaei/init.lua
+[submodule "nvim"]
+	path = nvim
+	url = https://github.com/nikanzeyaei/init.lua
