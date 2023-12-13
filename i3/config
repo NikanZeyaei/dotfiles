@@ -237,7 +237,7 @@ set $grey		#b0b5bd
 set $mediumgrey		#8b8b8b
 set $yellowbrown	#e1b700
 
-client.focused		    	$lightblue	$darkblue	$white		$mediumgrey	$mediumgrey
+client.focused		    	$grey	$darkblue	$white		$mediumgrey	$mediumgrey
 client.unfocused	    	$darkblue	$darkblue	$grey		$darkgrey	$darkgrey
 client.focused_inactive		$darkblue	$darkblue	$grey		$black		$black
 client.urgent		    	$urgentred	$urgentred	$white		$yellowbrown	$yellowbrown
@@ -275,3 +275,4 @@ exec_always feh --bg-max --randomize ~/Pictures/Wallpapers
 exec_always picom --config ~/.config/picom.conf -b
 
 exec_always setxkbmap -layout "us,ir" \ -option "grp:alt_shift_toggle"
+exec_always setxkbmap -option caps:swapescape
