@@ -20,10 +20,16 @@ timezsh() {
   for i in $(seq 2 10); do time $shell -i -c exit; done
 }
 
+zmodload zsh/zprof
+
 source $ZSH/oh-my-zsh.sh
 alias vim="nvim"
 alias p="sudo pacman"
+alias b="sudo bluetoothctl"
+alias copy='xsel -ib'
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+export EDITOR=nvim
 
 # source /usr/share/nvm/init-nvm.sh
 
@@ -44,3 +50,15 @@ export DOOM=$HOME/.config/emacs/bin
 export FLYCTL=$HOME/.fly
 export PATH=$PATH:$GOBIN:$LOCAL_SCRIPTS:$BOB:$DOOM:$FLYCTL/bin
 
+eval $(thefuck --alias)
+fpath=(~/.zsh.d/ $fpath)
+
+# bun completions
+[ -s "/home/nikanzeyaei/.bun/_bun" ] && source "/home/nikanzeyaei/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+export VI_MODE_RESET_PROMPT_ON_MODE_CHANGE=false
+
+ZVM_CURSOR_STYLE_ENABLED=false
