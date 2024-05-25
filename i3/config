@@ -103,7 +103,8 @@ bindsym $mod+shift+q kill
 
 bindsym $mod+Shift+e exec ~/.config/i3/scripts/powermenu
 
-bindsym $mod+shift+x exec ~/.config/i3/scripts/blur-lock
+# bindsym $mod+shift+x exec ~/.config/i3/scripts/blur-lock
+bindsym $mod+shift+x exec betterlockscreen -l dim
 
 bindsym $mod+Shift+c reload
 
@@ -276,3 +277,5 @@ exec_always picom --config ~/.config/picom.conf -b
 
 exec_always setxkbmap -layout "us,ir" \ -option "grp:alt_shift_toggle"
 exec_always setxkbmap -option caps:swapescape
+# exec_always xmodmap ~/.config/remap_number_rows
+
