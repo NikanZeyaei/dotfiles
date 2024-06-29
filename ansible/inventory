@@ -1,0 +1,5 @@
+[target_arch_machines]
+localhost
+
+[all:vars]
+ansible_connection=local

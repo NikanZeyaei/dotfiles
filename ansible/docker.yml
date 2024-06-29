@@ -1,0 +1,36 @@
+    - name: install docker and docker compose
+      pacman:
+        update_cache: yes
+        name:
+          - docker
+          - docker-compose
+
+    - name: enable and start docker.service
+      systemd:
+        name: docker
+        enabled: yes
+        state: started
+
+    - name: add the user to docker group
+      user:
+        name: "{{ ansible_user }}"
+        groups: docker
+        append: yes
+
+    - name: Create /etc/docker directory if it does not exist
+      file:
+        path: /etc/docker
+        state: directory
+        mode: '0755'
+
+    - name: set default max logs size to 250MB and set logs rotation
+      copy:
+        dest: '/etc/docker/daemon.json'
+        content: |
+          {
+            "log-driver": "json-file",
+            "log-opts": {
+              "max-size": "50m",
+              "max-file": "5"
+            }
+          }

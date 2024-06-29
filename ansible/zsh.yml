@@ -1,0 +1,34 @@
+    - name: Install zsh-nvm 
+      git:
+        repo: https://github.com/lukechilds/zsh-nvm
+        dest: /home/nikanzeyaei/.oh-my-zsh/plugins/zsh-nvm
+        clone: yes
+        update: yes
+
+    - name: Install zsh-vi-mode 
+      git:
+        repo: https://github.com/jeffreytse/zsh-vi-mode
+        dest: /home/nikanzeyaei/.oh-my-zsh/plugins/zsh-vi-mode
+        clone: yes
+        update: yes
+
+    - name: Install zsh-autosuggestions
+      git:
+        repo: https://github.com/zsh-users/zsh-autosuggestions
+        dest: /home/nikanzeyaei/.oh-my-zsh/plugins/zsh-autosuggestions
+        clone: yes
+        update: yes
+
+    - name: Install zsh-syntax-highlighting
+      git:
+        repo: https://github.com/zsh-users/zsh-syntax-highlighting.git
+        dest: /home/nikanzeyaei/.oh-my-zsh/plugins/zsh-syntax-highlighting
+        clone: yes
+        update: yes
+
+    - name: Install zsh-autoswitch-virtualenv
+      git:
+        repo: https://github.com/MichaelAquilina/zsh-autoswitch-virtualenv.git
+        dest: /home/nikanzeyaei/.oh-my-zsh/plugins/autoswitch_virtualenv
+        clone: yes
+        update: yes

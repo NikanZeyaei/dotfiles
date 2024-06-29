@@ -1,0 +1,47 @@
+---
+- name: playbook_core.yml - archlinux base setup
+  hosts: all
+  become: yes
+
+  tasks:
+
+    - name: update arch
+      pacman:
+        update_cache: yes
+        upgrade: yes
+
+    - name: install bunch of packages
+      pacman:
+        update_cache: yes
+        name:
+          - zsh # Sure
+          - yay # Yes
+          - brightnessctl # The default one just doesn't work
+          - tmux # Yup
+          - bob # Manages neovim versions
+          - obs-studio # I sometimes like to record stuff
+          - htop # I usually open this when I'm doing java
+          - ripgrep # To use with neovim
+          - arandr # For using multiple monitors
+          - picom
+          - thefuck
+          - go
+
+
+    - name: install tpm
+      git:
+        repo: https://github.com/tmux-plugins/tpm
+        dest: /home/nikanzeyaei/.tmux/plugins/tpl
+        clone: yes
+        update: yes
+
+    - name: Clone neovim config 
+      git:
+        repo: https://github.com/NikanZeyaei/init.lua.git
+        dest: /home/nikanzeyaei/.config/nvim
+        clone: yes
+        update: yes
+
+    - include_tasks: docker.yml
+    - include_tasks: zsh.yml
+      
