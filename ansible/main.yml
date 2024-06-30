@@ -26,13 +26,24 @@
         update_cache: yes
         upgrade: yes
 
-    - name: Install noisetorch using yay
+    - name: Install some packages using yay
       kewlfft.aur.aur:
         use: yay
         name:
+          - spotify
           - noisetorch-bin
+          - optimus-manager
+          - optimus-manager-qt
+          - expressvpn
+          - betterlockscreen
       become: yes
       become_user: aur_builder
+
+    # - name: Delete the aur_builder user
+    #   ansible.builtin.user:
+    #     name: aur_builder
+    #     state: absent
+    #     remove: yes
 
     - name: install bunch of packages
       pacman:
@@ -51,6 +62,7 @@
           - flameshot # Best screenshotting tool ever tbh
           - thefuck
           - go
+          - blueman
 
 
     - name: install tpm
