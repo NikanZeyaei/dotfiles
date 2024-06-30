@@ -48,6 +48,7 @@
           - ripgrep # To use with neovim
           - arandr # For using multiple monitors
           - picom
+          - flameshot # Best screenshotting tool ever tbh
           - thefuck
           - go
 
