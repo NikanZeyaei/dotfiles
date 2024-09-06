@@ -147,6 +147,8 @@ bindsym $mod+e layout toggle split
 
 bindsym $mod+Shift+space floating toggle
 
+bindsym $mod+Shift+s sticky toggle
+
 bindsym $mod+space focus mode_toggle
 
 bindsym $mod+a focus parent
