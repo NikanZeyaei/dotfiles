@@ -157,7 +157,6 @@ set $ws9 "9"
 set $ws10 "10"
 
 assign [class="TelegramDesktop"] $ws5
-assign [class="nekoray"] $ws10
 assign [class="Slack"] $ws9
 
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
@@ -251,7 +250,7 @@ bindsym $mod+b exec boomer
 bindsym $mod+t exec rofi -show window \
 		-config ~/.config/rofi/rofidmenu.rasi
 
-exec_always feh --bg-max --randomize ~/Pictures/Wallpapers
+exec_always feh --bg-max --randomize ~/Pictures/wallpapers
 exec_always picom --config ~/.config/picom.conf -b
 
 exec_always setxkbmap -layout "us,ir" -option "grp:alt_shift_toggle"
