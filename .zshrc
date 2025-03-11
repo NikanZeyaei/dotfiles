@@ -1,78 +1,83 @@
-source /home/nikan/.bash_profile
-source /home/nikan/.bashrc
+# Created by newuser for 5.9
 
-export BROWSER='/usr/bin/firefox' 
+### Added by Zinit's installer
+if [[ ! -f $HOME/.local/share/zinit/zinit.git/zinit.zsh ]]; then
+    print -P "%F{33} %F{220}Installing %F{33}ZDHARMA-CONTINUUM%F{220} Initiative Plugin Manager (%F{33}zdharma-continuum/zinit%F{220})…%f"
+    command mkdir -p "$HOME/.local/share/zinit" && command chmod g-rwX "$HOME/.local/share/zinit"
+    command git clone https://github.com/zdharma-continuum/zinit "$HOME/.local/share/zinit/zinit.git" && \
+        print -P "%F{33} %F{34}Installation successful.%f%b" || \
+        print -P "%F{160} The clone has failed.%f%b"
+fi
 
-export ZSH="$HOME/.oh-my-zsh"
-ZSH_THEME="robbyrussell"
+source "$HOME/.local/share/zinit/zinit.git/zinit.zsh"
+autoload -Uz _zinit
+(( ${+_comps} )) && _comps[zinit]=_zinit
 
-export NVM_LAZY_LOAD=true
-export NVM_COMPLETION=true
-plugins=(
-	autoswitch_virtualenv
-	git
-	zsh-autosuggestions
-	zsh-syntax-highlighting
-	zsh-history-substring-search
-	zsh-vi-mode
-	zsh-nvm
-	sudo
-)
+# Load a few important annexes, without Turbo
+# (this is currently required for annexes)
+zinit light-mode for \
+    zdharma-continuum/zinit-annex-as-monitor \
+    zdharma-continuum/zinit-annex-bin-gem-node \
+    zdharma-continuum/zinit-annex-patch-dl \
+    zdharma-continuum/zinit-annex-rust
 
-bindkey '^[[1;5B' history-substring-search-up
-bindkey '^[[1;5A' history-substring-search-down
+### End of Zinit's installer chunk
 
-timezsh() {
-  shell=${1-$SHELL}
-  for i in $(seq 2 10); do time $shell -i -c exit; done
-}
-
-zmodload zsh/zprof
-
-source $ZSH/oh-my-zsh.sh
-alias vim="nvim"
-alias p="sudo pacman"
-alias b="sudo bluetoothctl"
-alias copy='xsel -ib'
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
-export EDITOR=nvim
-
-# source /usr/share/nvm/init-nvm.sh
-
-# Use vim keys in tab complete menu
-bindkey -M menuselect 'h' vi-backward-char
-bindkey -M menuselect 'k' vi-up-line-or-history
-bindkey -M menuselect 'l' vi-forward-char
-bindkey -M menuselect 'j' vi-down-line-or-history
+# Bindings
+bindkey -e
+# bindkey -M menuselect 'h' vi-backward-char
+# bindkey -M menuselect 'k' vi-up-line-or-history
+# bindkey -M menuselect 'l' vi-forward-char
+# bindkey -M menuselect 'j' vi-down-line-or-history
 bindkey -v '^?' backward-delete-char
 
-setopt autocd		# Automatically cd into typed directory.
 
-export GOPATH=$HOME/go
-export GOBIN=$GOPATH/bin
-export LOCAL_SCRIPTS=$HOME/.local/bin
-export BOB=$HOME/.local/share/bob/nvim-bin
-export DOOM=$HOME/.config/emacs/bin
-export FLYCTL=$HOME/.fly
-export PATH=$PATH:$GOBIN:$LOCAL_SCRIPTS:$BOB:$DOOM:$FLYCTL/bin
+# Plugins
+zinit light zsh-users/zsh-syntax-highlighting
+zinit light zsh-users/zsh-completions
+zinit light zsh-users/zsh-autosuggestions
+# zinit light Aloxaf/fzf-tab
+zinit ice depth=1; zinit light jeffreytse/zsh-vi-mode
 
-eval $(thefuck --alias)
-fpath=(~/.zsh.d/ $fpath)
+# Snippets
+zinit snippet OMZP::git
+zinit snippet OMZP::sudo
+zinit snippet OMZP::archlinux
+zinit snippet OMZP::command-not-found
+# zinit snippet OMZT::robbyrussell.zsh-theme
 
-# bun completions
-[ -s "/home/nikanzeyaei/.bun/_bun" ] && source "/home/nikanzeyaei/.bun/_bun"
+# Load Completions
+autoload -U compinit && compinit
 
-# bun
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
-export VI_MODE_RESET_PROMPT_ON_MODE_CHANGE=false
+zinit cdreplay -q
+
+# History
+HISTSIZE=5000
+HISTFILE=~/.zsh-history
+SAVEHIST=$HISTSIZE
+HISTDUP=erase
+setopt appendhistory
+setopt sharehistory
+setopt hist_ignore_space
+setopt hist_ignore_all_dups
+setopt hist_save_no_dups
+setopt hist_ignore_dups
+setopt hist_find_no_dups
+
+# Options
+setopt autocd
+
+# Completion Styling
+# zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-Z}'
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+# zstyle ':completion:*' menu no
+
+# Aliases
+alias ls='ls --color'
+
+# Shell Integrations
+# eval "$(fzf --zsh)"
+# eval "$(oh-my-posh init zsh)"
+eval "$(starship init zsh)"
 
 ZVM_CURSOR_STYLE_ENABLED=false
-
-# export NVM_DIR="$HOME/.nvm"
-# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-export PATH=$PATH:/home/nikan/.spicetify
-___MY_VMOPTIONS_SHELL_FILE="${HOME}/.jetbrains.vmoptions.sh"; if [ -f "${___MY_VMOPTIONS_SHELL_FILE}" ]; then . "${___MY_VMOPTIONS_SHELL_FILE}"; fi
