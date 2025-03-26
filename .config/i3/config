@@ -247,6 +247,8 @@ bindsym $mod+m exec rofi -modi "clipboard:greenclip print" -show clipboard -run-
 
 bindsym $mod+b exec boomer
 
+bindsym $mod+x exec xkill
+
 bindsym $mod+t exec rofi -show window \
 		-config ~/.config/rofi/rofidmenu.rasi
 
