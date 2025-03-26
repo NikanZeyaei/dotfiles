@@ -75,7 +75,7 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-bindsym $mod+Return exec i3-sensible-terminal 
+bindsym $mod+Return exec ghostty
 
 bindsym $mod+shift+q kill
 
