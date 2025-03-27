@@ -1,19 +1,21 @@
-print("1")
 return {
 	"stevearc/conform.nvim",
 	opts = {
 		formatters_by_ft = {
 			lua = { "stylua", lsp_format = "fallback" },
-			python = { "isort", "black" },
-			rust = { "rustfmt", lsp_format = "fallback" },
-			javascript = { "prettierd", "prettier", stop_after_first = true },
+			-- javascript = { "eslint_d", "prettierd", stop_after_first = true },
+			-- typescript = { "eslint_d", "prettierd", stop_after_first = true },
+			-- javascriptreact = { "eslint_d", "prettierd", stop_after_first = true },
+			-- typescriptreact = { "eslint_d", "prettierd", stop_after_first = true },
+			go = { "gofumpt", "golines", "goimports" },
 		},
 	},
 	keys = {
 		{
 			"<leader>cf",
 			function()
-				require("conform").format()
+				local conform = require("conform")
+				conform.format()
 			end,
 			desc = "Format file",
 		},
