@@ -30,7 +30,7 @@ return {
 
 		"rafamadriz/friendly-snippets",
 
-		-- 'lukas-reineke/cmp-rg'
+		'lukas-reineke/cmp-rg'
 	},
 
 	config = function()
