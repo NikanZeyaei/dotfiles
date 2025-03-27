@@ -7,6 +7,10 @@ function ColorMyCatppuccin()
 	vim.api.nvim_set_hl(0, "NormalNC", { link = "Normal" })
 end
 
+function ColorMyGruberDarker()
+	vim.cmd.colorscheme("gruber-darker")
+end
+
 return {
 	{
 		"catppuccin/nvim",
@@ -15,5 +19,8 @@ return {
 		config = function()
 			vim.cmd.colorscheme("catppuccin")
 		end,
+	},
+	{
+		"blazkowolf/gruber-darker.nvim",
 	},
 }
