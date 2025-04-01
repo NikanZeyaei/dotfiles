@@ -8,6 +8,7 @@ return {
 			-- javascriptreact = { "eslint_d", "prettierd", stop_after_first = true },
 			-- typescriptreact = { "eslint_d", "prettierd", stop_after_first = true },
 			go = { "gofumpt", "golines", "goimports" },
+			c = { "clang-format" },
 		},
 	},
 	keys = {
