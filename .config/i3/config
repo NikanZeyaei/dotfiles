@@ -256,9 +256,10 @@ bindsym $mod+t exec rofi -show window \
 exec_always feh --bg-max --randomize ~/Pictures/wallpapers
 exec_always picom --config ~/.config/picom.conf -b
 
-# exec_always setxkbmap -option caps:swapescape
+exec_always setxkbmap -option caps:swapescape
 exec_always setxkbmap -layout "us,ir" -option "grp:alt_shift_toggle"
-exec_always setxkbmap -option 'caps:ctrl_modifier'
-exec_always xcape -e 'Caps_Lock=Escape'
+# TODO: Doing this weirdly made the Caps button unresponsive in neovim. have to find out why later
+# exec_always setxkbmap -option 'caps:ctrl_modifier'
+# exec_always xcape -e 'Caps_Lock=Escape'
 
 exec_always greenclip daemon
