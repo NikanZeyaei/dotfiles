@@ -35,7 +35,7 @@ return {
 
 			vim.api.nvim_buf_create_user_command(bufnr, "Format", function(_)
 				require("conform").format()
-			end)
+			end, {})
 		end
 
 		require("fidget").setup({})
