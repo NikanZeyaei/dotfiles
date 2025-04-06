@@ -20,6 +20,7 @@ return {
 			require("cmp_nvim_lsp").default_capabilities()
 		)
 
+        ---@diagnostic disable-next-line: unused-local
 		local on_attach = function(client, bufnr)
 			vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { buffer = bufnr })
 			vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { buffer = bufnr })
@@ -40,25 +41,43 @@ return {
 
 		require("fidget").setup({})
 		require("mason").setup()
+
+		local servers = {
+			"bashls",
+			"lua_ls",
+			"eslint",
+			"gopls",
+			"jsonls",
+			"sqls",
+		}
+
+		local server_configs = {
+			denols = {
+				root_dir = require("lspconfig").util.root_pattern("deno.json", "deno.jsonc"),
+			},
+			ts_ls = {
+				root_dir = require("lspconfig").util.root_pattern("package.json"),
+				single_file_support = false,
+			},
+		}
+
+		for server, _ in pairs(server_configs) do
+			table.insert(servers, server)
+		end
+
 		require("mason-lspconfig").setup({
 			automatic_installation = false,
-			ensure_installed = {
-                "bashls",
-				"lua_ls",
-				"ts_ls",
-				"eslint",
-				"gopls",
-                "jsonls",
-                "sqls",
-			},
-			handlers = {
-				function(server_name)
-					require("lspconfig")[server_name].setup({
-						capabilities = capabilities,
-						on_attach = on_attach,
-					})
-				end,
-			},
+			ensure_installed = servers,
 		})
+
+		local lspconfig = require("lspconfig")
+
+		for _, server in ipairs(servers) do
+			local config = server_configs[server] or {}
+			lspconfig[server].setup(vim.tbl_extend("force", {
+				capabilities = capabilities,
+				on_attach = on_attach,
+			}, config))
+		end
 	end,
 }
