@@ -24,5 +24,25 @@ return {
 		vim.keymap.set("n", "<leader>df", "<cmd>DBUIFindBuffer<CR>", { desc = "Find DB Buffer" })
 		vim.keymap.set("n", "<leader>dr", "<cmd>DBUIRenameBuffer<CR>", { desc = "Rename DB Buffer" })
 		vim.keymap.set("n", "<leader>dq", "<cmd>DBUILastQueryInfo<CR>", { desc = "Last Query Info" })
+
+        -- TODO: This probably shouldn't be here
+		local group = vim.api.nvim_create_augroup("dadbod_completion", { clear = true })
+		vim.api.nvim_create_autocmd("FileType", {
+			pattern = {
+				"sql",
+				"mysql",
+				"plsql",
+			},
+			callback = function()
+				require("cmp").setup.buffer({
+					sources = {
+						{ name = "vim-dadbod-completion" },
+						{ name = "buffer" },
+						{ name = "luasnip" },
+					},
+				})
+			end,
+			group = group,
+		})
 	end,
-} 
+}
