@@ -43,10 +43,13 @@ return {
 		require("mason-lspconfig").setup({
 			automatic_installation = false,
 			ensure_installed = {
+                "bashls",
 				"lua_ls",
 				"ts_ls",
 				"eslint",
 				"gopls",
+                "jsonls",
+                "sqls",
 			},
 			handlers = {
 				function(server_name)

@@ -10,6 +10,7 @@ return {
 		"rafamadriz/friendly-snippets",
 		"L3MON4D3/LuaSnip",
 		"lukas-reineke/cmp-rg",
+		"kristijanhusak/vim-dadbod-completion",
 	},
 
 	config = function()
@@ -64,6 +65,7 @@ return {
 						nvim_lsp = "[LSP]",
 						vsnip = "[Snippet]",
 						path = "[Path]",
+						["vim-dadbod-completion"] = "[DB]",
 					})[entry.source.name]
 					return vim_item
 				end,
@@ -74,6 +76,7 @@ return {
 				{ name = "buffer" },
 				{ name = "rg" },
 				{ name = "path" },
+				{ name = "vim-dadbod-completion" },
 			}, {
 				{ name = "buffer" },
 			}),
