@@ -11,6 +11,7 @@ return {
 		"L3MON4D3/LuaSnip",
 		"lukas-reineke/cmp-rg",
 		"kristijanhusak/vim-dadbod-completion",
+		"olimorris/codecompanion.nvim",
 	},
 
 	config = function()
@@ -66,6 +67,7 @@ return {
 						vsnip = "[Snippet]",
 						path = "[Path]",
 						["vim-dadbod-completion"] = "[DB]",
+						codecompanion = "[AI]",
 					})[entry.source.name]
 					return vim_item
 				end,
@@ -76,7 +78,8 @@ return {
 				{ name = "buffer" },
 				{ name = "rg" },
 				{ name = "path" },
-				{ name = "vim-dadbod-completion" },
+				{ name = "vim-dadbod-completion" }, -- TODO: This still doesn't work
+				{ name = "codecompanion" },
 			}, {
 				{ name = "buffer" },
 			}),
