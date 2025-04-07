@@ -78,8 +78,8 @@ return {
 				{ name = "buffer" },
 				{ name = "rg" },
 				{ name = "path" },
-				{ name = "vim-dadbod-completion" }, -- TODO: This still doesn't work
-				{ name = "codecompanion" },
+				{ name = "vim-dadbod-completion" },
+				{ name = "codecompanion" }, -- TODO: This still doesn't work
 			}, {
 				{ name = "buffer" },
 			}),
