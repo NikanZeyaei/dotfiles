@@ -30,4 +30,9 @@ return {
 	{
 		"mg979/vim-visual-multi",
 	},
+	{
+		"folke/todo-comments.nvim",
+		dependencies = { "nvim-lua/plenary.nvim" },
+		opts = {},
+	},
 }
