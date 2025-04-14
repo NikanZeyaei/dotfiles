@@ -9,6 +9,13 @@ return {
 			changedelete = { text = "~" },
 		},
 		on_attach = function(bufnr)
+			-- Set up highlight groups (new recommended way)
+			vim.api.nvim_set_hl(0, "GitSignsAdd", { fg = "#00ff00", bg = nil })
+			vim.api.nvim_set_hl(0, "GitSignsChange", { fg = "#ffff00", bg = nil })
+			vim.api.nvim_set_hl(0, "GitSignsDelete", { fg = "#ff0000", bg = nil })
+			vim.api.nvim_set_hl(0, "GitSignsChangedelete", { link = "GitSignsChange" })
+			vim.api.nvim_set_hl(0, "GitSignsTopdelete", { link = "GitSignsDelete" })
+
 			vim.keymap.set("n", "<leader>hp", require("gitsigns").preview_hunk, { buffer = bufnr })
 
 			-- don't override the built-in and fugitive keymaps
