@@ -30,7 +30,7 @@ return {
 			vim.keymap.set("n", "gI", require("telescope.builtin").lsp_implementations, { buffer = bufnr })
 
 			vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = bufnr })
-			vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, { buffer = bufnr })
+			vim.keymap.set("i", "<C-k>", vim.lsp.buf.signature_help, { buffer = bufnr })
 
 			vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { buffer = bufnr })
 
