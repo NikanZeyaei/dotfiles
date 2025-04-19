@@ -72,6 +72,8 @@ return {
 
 		local lspconfig = require("lspconfig")
 
+		vim.lsp.enable("gleam")
+
 		for _, server in ipairs(servers) do
 			local config = server_configs[server] or {}
 			lspconfig[server].setup(vim.tbl_extend("force", {
