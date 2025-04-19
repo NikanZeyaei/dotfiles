@@ -20,7 +20,7 @@ return {
 			require("cmp_nvim_lsp").default_capabilities()
 		)
 
-        ---@diagnostic disable-next-line: unused-local
+		---@diagnostic disable-next-line: unused-local
 		local on_attach = function(client, bufnr)
 			vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { buffer = bufnr })
 			vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { buffer = bufnr })
@@ -49,6 +49,7 @@ return {
 			"gopls",
 			"jsonls",
 			"sqls",
+			"clangd",
 		}
 
 		local server_configs = {
@@ -57,6 +58,9 @@ return {
 			},
 			ts_ls = {
 				root_dir = require("lspconfig").util.root_pattern("package.json"),
+				single_file_support = true,
+			},
+			clangd = {
 				single_file_support = true,
 			},
 		}
