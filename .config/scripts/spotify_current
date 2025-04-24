@@ -1,0 +1,14 @@
+#!/bin/bash
+
+if pgrep -x "spotify" > /dev/null && playerctl -p spotify status 2>/dev/null | grep -q "Playing"; then
+    artist=$(playerctl -p spotify metadata artist 2>/dev/null)
+    title=$(playerctl -p spotify metadata title 2>/dev/null)
+    
+    if [ -n "$artist" ] && [ -n "$title" ]; then
+        echo "♫ $artist - $title"
+    else
+        echo "Lock Screen"
+    fi
+else
+    echo "Lock Screen"
+fi
