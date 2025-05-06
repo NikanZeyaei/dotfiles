@@ -215,10 +215,10 @@ bar {
 		    tray_padding 0
             strip_workspace_numbers yes
 		    colors {
-                    separator          $purple
-                    background         $darkgrey
-                    statusline         $white
-                    focused_workspace	$mediumgrey	   	$grey		$darkgrey	$purple
+                    separator           $purple
+                    background          $darkgrey
+                    statusline          $white
+                    focused_workspace	$mediumgrey	   	    $grey		$darkgrey	$purple
                     active_workspace	$lightblue      	$mediumgrey	$darkgrey	$purple
                     inactive_workspace	$darkgrey   		$darkgrey	$grey		$purple
                     urgent_workspace	$urgentred	    	$urgentred	$white		$purple
