@@ -66,6 +66,9 @@ return {
 			clangd = {
 				single_file_support = true,
 			},
+			elixirls = {
+				root_dir = require("lspconfig").util.root_pattern("mix.exs"),
+			},
 		}
 
 		for server, _ in pairs(server_configs) do
