@@ -53,6 +53,7 @@ return {
 			"jsonls",
 			"sqls",
 			"clangd",
+			"biome",
 		}
 
 		local server_configs = {
@@ -62,6 +63,9 @@ return {
 			ts_ls = {
 				root_dir = require("lspconfig").util.root_pattern("package.json"),
 				single_file_support = true,
+			},
+			biome = {
+				root_dir = require("lspconfig").util.root_pattern("biome.json"),
 			},
 			clangd = {
 				single_file_support = true,
@@ -81,6 +85,16 @@ return {
 		})
 
 		local lspconfig = require("lspconfig")
+
+		lspconfig.tailwindcss.setup({
+			init_options = {
+				userLanguages = {
+					elixir = "html-eex",
+					eelixir = "html-eex",
+					heex = "html-eex",
+				},
+			},
+		})
 
 		vim.lsp.enable("gleam")
 
