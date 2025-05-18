@@ -73,6 +73,9 @@ return {
 			elixirls = {
 				root_dir = require("lspconfig").util.root_pattern("mix.exs"),
 			},
+			rust_analyzer = {
+				root_dir = require("lspconfig").util.root_pattern("Cargo.toml"),
+			},
 		}
 
 		for server, _ in pairs(server_configs) do
