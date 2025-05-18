@@ -9,6 +9,7 @@ return {
 			-- typescriptreact = { "eslint_d", "prettierd", stop_after_first = true },
 			go = { "gofumpt", "golines", "goimports" },
 			c = { "clang-format" },
+			sql = { "sqlfmt" },
 		},
 	},
 	keys = {
