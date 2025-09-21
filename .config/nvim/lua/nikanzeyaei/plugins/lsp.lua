@@ -57,29 +57,38 @@ return {
 		}
 
 		local server_configs = {
-			denols = {
-				root_dir = require("lspconfig").util.root_pattern("deno.json", "deno.jsonc"),
-			},
-			ts_ls = {
-				root_dir = require("lspconfig").util.root_pattern("package.json"),
-				single_file_support = true,
-			},
+			-- denols = {
+			-- 	root_markers = { "deno.json", "deno.jsonc" },
+			-- },
+			-- ts_ls = {
+			-- 	root_markers = { "package.json" },
+			-- 	single_file_support = true,
+			-- },
 			biome = {
-				root_dir = require("lspconfig").util.root_pattern("biome.json"),
+				root_markers = { "biome.json" },
 			},
 			clangd = {
 				single_file_support = true,
 			},
 			elixirls = {
-				root_dir = require("lspconfig").util.root_pattern("mix.exs"),
+				root_markers = { "mix.exs" },
 			},
 			rust_analyzer = {
-				root_dir = require("lspconfig").util.root_pattern("Cargo.toml"),
+				root_markers = { "Cargo.toml" },
+			},
+			tailwindcss = {
+				init_options = {
+					userLanguages = {
+						elixir = "html-eex",
+						eelixir = "html-eex",
+						heex = "html-eex",
+					},
+				},
 			},
 		}
 
-		for server, _ in pairs(server_configs) do
-			table.insert(servers, server)
+		for name, _ in pairs(server_configs) do
+			table.insert(servers, name)
 		end
 
 		require("mason-lspconfig").setup({
@@ -87,26 +96,17 @@ return {
 			ensure_installed = servers,
 		})
 
-		local lspconfig = require("lspconfig")
-
-		lspconfig.tailwindcss.setup({
-			init_options = {
-				userLanguages = {
-					elixir = "html-eex",
-					eelixir = "html-eex",
-					heex = "html-eex",
-				},
-			},
-		})
+		local base = {
+			capabilities = capabilities,
+			on_attach = on_attach,
+		}
 
 		vim.lsp.enable("gleam")
 
-		for _, server in ipairs(servers) do
-			local config = server_configs[server] or {}
-			lspconfig[server].setup(vim.tbl_extend("force", {
-				capabilities = capabilities,
-				on_attach = on_attach,
-			}, config))
+		for _, name in ipairs(servers) do
+			local cfg = vim.tbl_deep_extend("force", base, server_configs[name] or {})
+			vim.lsp.config(name, cfg)
+			vim.lsp.enable(name)
 		end
 	end,
 }

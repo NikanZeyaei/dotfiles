@@ -36,25 +36,27 @@ return {
 				},
 			},
 			adapters = {
-				openrouter = function()
-					-- Extends the "openai_compatible" adapter with OpenRouter-specific settings.
-					return require("codecompanion.adapters").extend("openai_compatible", {
-						env = {
-							-- OpenRouter API URL
-							url = "https://openrouter.ai/api",
-							-- API key retrieved from the environment variable OPENAI_API_KEY
-							api_key = os.getenv("OPENAI_API_KEY"),
-							-- Chat completions endpoint
-							chat_url = "/v1/chat/completions",
-						},
-						schema = {
-							-- Model to use for OpenRouter (defaults to the current model).
-							model = {
-								default = current_model,
+				http = {
+					openrouter = function()
+						-- Extends the "openai_compatible" adapter with OpenRouter-specific settings.
+						return require("codecompanion.adapters").extend("openai_compatible", {
+							env = {
+								-- OpenRouter API URL
+								url = "https://openrouter.ai/api",
+								-- API key retrieved from the environment variable OPENAI_API_KEY
+								api_key = os.getenv("OPENAI_API_KEY"),
+								-- Chat completions endpoint
+								chat_url = "/v1/chat/completions",
 							},
-						},
-					})
-				end,
+							schema = {
+								-- Model to use for OpenRouter (defaults to the current model).
+								model = {
+									default = current_model,
+								},
+							},
+						})
+					end,
+				},
 			},
 		})
 
