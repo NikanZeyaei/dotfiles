@@ -11,7 +11,6 @@ return {
 		"L3MON4D3/LuaSnip",
 		"lukas-reineke/cmp-rg",
 		"kristijanhusak/vim-dadbod-completion",
-		"olimorris/codecompanion.nvim",
 	},
 
 	config = function()
@@ -33,6 +32,7 @@ return {
 				["<C-d>"] = cmp.mapping.scroll_docs(-4),
 				["<C-f>"] = cmp.mapping.scroll_docs(4),
 				["<C-Space>"] = cmp.mapping.complete({}),
+				["<M-Space>"] = cmp.mapping.complete({}),
 				["<CR>"] = cmp.mapping.confirm({
 					behavior = cmp.ConfirmBehavior.Replace,
 					select = true,
@@ -67,7 +67,6 @@ return {
 						vsnip = "[Snippet]",
 						path = "[Path]",
 						["vim-dadbod-completion"] = "[DB]",
-						codecompanion = "[AI]",
 					})[entry.source.name]
 					return vim_item
 				end,
@@ -79,7 +78,6 @@ return {
 				{ name = "rg" },
 				{ name = "path" },
 				{ name = "vim-dadbod-completion" },
-				{ name = "codecompanion" }, -- TODO: This still doesn't work
 			}, {
 				{ name = "buffer" },
 			}),

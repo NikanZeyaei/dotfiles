@@ -20,39 +20,45 @@ return {
 			require("cmp_nvim_lsp").default_capabilities()
 		)
 
-		---@diagnostic disable-next-line: unused-local
-		local on_attach = function(client, bufnr)
-			vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { buffer = bufnr })
-			vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { buffer = bufnr })
+		local lsp_keymaps = function(bufnr)
+			vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { buffer = bufnr, desc = "Rename symbol" })
+			vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { buffer = bufnr, desc = "Code action" })
 			vim.keymap.set("n", "<leader>lk", function()
 				vim.diagnostic.open_float()
-			end, { buffer = bufnr })
+			end, { buffer = bufnr, desc = "Line diagnostics" })
 
-			vim.keymap.set("n", "gd", vim.lsp.buf.definition, { buffer = bufnr })
-			vim.keymap.set("n", "gr", require("telescope.builtin").lsp_references, { buffer = bufnr })
-			vim.keymap.set("n", "gI", require("telescope.builtin").lsp_implementations, { buffer = bufnr })
+			vim.keymap.set("n", "gd", vim.lsp.buf.definition, { buffer = bufnr, desc = "Go to definition" })
+			vim.keymap.set("n", "gr", require("telescope.builtin").lsp_references, { buffer = bufnr, desc = "References" })
+			vim.keymap.set("n", "gI", require("telescope.builtin").lsp_implementations, { buffer = bufnr, desc = "Implementations" })
 
-			vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = bufnr })
-			vim.keymap.set("i", "<C-k>", vim.lsp.buf.signature_help, { buffer = bufnr })
+			vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = bufnr, desc = "Hover" })
+			vim.keymap.set("i", "<C-k>", vim.lsp.buf.signature_help, { buffer = bufnr, desc = "Signature help" })
 
-			vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { buffer = bufnr })
+			vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { buffer = bufnr, desc = "Go to declaration" })
 
 			vim.api.nvim_buf_create_user_command(bufnr, "Format", function(_)
 				require("conform").format()
 			end, {})
 		end
 
+		vim.api.nvim_create_autocmd("LspAttach", {
+			group = vim.api.nvim_create_augroup("NikanzeyaeiLspKeymaps", { clear = true }),
+			callback = function(event)
+				lsp_keymaps(event.buf)
+			end,
+		})
+
 		require("fidget").setup({})
 		require("mason").setup()
 
 		local servers = {
-			"bashls",
+			-- "bashls",
 			"lua_ls",
 			"eslint",
-			"gopls",
-			"jsonls",
+			-- "gopls",
+			-- "jsonls",
 			"sqls",
-			"clangd",
+			-- "clangd",
 			"biome",
 		}
 
@@ -98,7 +104,6 @@ return {
 
 		local base = {
 			capabilities = capabilities,
-			on_attach = on_attach,
 		}
 
 		vim.lsp.enable("gleam")
