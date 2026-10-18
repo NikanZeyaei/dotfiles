@@ -11,6 +11,38 @@ return {
 	config = function()
 		require("neodev").setup()
 
+		local function get_python_path()
+				local function find_pyproject(start_path)
+					local cwd = start_path or vim.fn.getcwd()
+					local marker = cwd .. "/pyproject.toml"
+					if vim.fn.filereadable(marker) == 1 then
+						return cwd
+					end
+					local parent = vim.fn.fnamemodify(cwd, ":h")
+					if parent ~= cwd and parent ~= "" then
+						return find_pyproject(parent)
+					end
+					return nil
+				end
+
+				local project_root = find_pyproject()
+				if project_root then
+					local handle = io.popen("cd " .. project_root .. " && poetry env info -p 2>/dev/null")
+					if handle then
+						local result = handle:read("*a"):gsub("%s+$", "")
+						handle:close()
+						if result and result ~= "" and result ~= "No virtualenv" then
+							return result .. "/bin/python"
+						end
+					end
+					local venv_path = project_root .. "/.venv"
+					if vim.fn.isdirectory(venv_path) == 1 then
+						return venv_path .. "/bin/python"
+					end
+				end
+				return "python3"
+			end
+
 		vim.diagnostic.config({ virtual_text = true, signs = true, underline = true })
 
 		local capabilities = vim.tbl_deep_extend(
@@ -66,12 +98,30 @@ return {
 			-- denols = {
 			-- 	root_markers = { "deno.json", "deno.jsonc" },
 			-- },
-			-- ts_ls = {
-			-- 	root_markers = { "package.json" },
-			-- 	single_file_support = true,
-			-- },
+			tsc = {},
 			biome = {
 				root_markers = { "biome.json" },
+			},
+			pyright = {
+				settings = {
+					python = {
+						pythonPath = get_python_path(),
+						analysis = {
+							typeCheckingMode = "basic",
+							autoSearchPaths = true,
+							useLibraryCodeForTypes = true,
+							diagnosticMode = "workspace",
+							extraPaths = {},
+						},
+					},
+				},
+			},
+			ruff = {
+				init_options = {
+					settings = {
+						args = {},
+					},
+				},
 			},
 			clangd = {
 				single_file_support = true,

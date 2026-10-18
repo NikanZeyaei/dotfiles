@@ -32,3 +32,9 @@ vim.opt.colorcolumn = "80"
 
 vim.opt.timeoutlen = 1000
 vim.opt.ttimeoutlen = 10
+
+vim.filetype.add({
+    extension = {
+        html = "htmldjango",
+    },
+})

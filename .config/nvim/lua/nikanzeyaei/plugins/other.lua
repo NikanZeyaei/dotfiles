@@ -35,5 +35,7 @@ return {
 		dependencies = { "nvim-lua/plenary.nvim" },
 		opts = {},
 	},
-    { 'wakatime/vim-wakatime', lazy = false }
+    {
+        'AndrewRadev/splitjoin.vim'
+    }
 }
