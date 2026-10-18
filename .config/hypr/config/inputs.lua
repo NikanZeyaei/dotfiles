@@ -4,7 +4,8 @@ hl.config({
     input = {
         -- sensitivity = -0.25,
         accel_profile = "flat",
-        kb_options = "caps:escape",
+        kb_layout = "us,ir",
+        kb_options = "caps:escape,grp:alt_shift_toggle",
         touchpad = {
             clickfinger_behavior = true,
             tap_button_map = "lrm",
