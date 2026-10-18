@@ -135,10 +135,10 @@ hl.bind(mainMod .. " + A", hl.dsp.exec_cmd(noctCall .. "panel-toggle control-cen
 ---- WORKSPACES & MONITORS ----
 -------------------------------
 
--- Focus on monitors
-hl.bind(mainMod .. " + " .. digitCode(1), hl.dsp.focus({ monitor = MONITOR1 }))
-hl.bind(mainMod .. " + " .. digitCode(2), hl.dsp.focus({ monitor = MONITOR2 }))
-hl.bind(mainMod .. " + " .. digitCode(3), hl.dsp.focus({ monitor = MONITOR3 }))
+-- Focus on workspace 1-10 (i3 style)
+for i = 1, 10 do
+    hl.bind(mainMod .. " + " .. digitCode(i % 10), hl.dsp.focus({ workspace = i }))
+end
 
 -- Focus on workspace number
 -- Absolute
