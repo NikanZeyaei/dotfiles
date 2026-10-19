@@ -8,6 +8,7 @@ hl.config({
         kb_layout = "us,ir",
         kb_options = "caps:escape,grp:alt_shift_toggle",
         touchpad = {
+            natural_scroll = true,
             clickfinger_behavior = true,
             tap_button_map = "lrm",
         },
