@@ -100,6 +100,40 @@
 (use-package which-key
   :config (which-key-mode 1))
 
+;;; Minibuffer completion & search (telescope.lua)
+
+(use-package vertico
+  :init (vertico-mode 1)
+  :custom (vertico-cycle t)
+  :bind (:map vertico-map
+              ("C-j" . vertico-next)
+              ("C-k" . vertico-previous)))
+
+;; Space-separated, any-order matching, like telescope's fuzzy filter.
+(use-package orderless
+  :custom
+  (completion-styles '(orderless basic))
+  (completion-category-overrides '((file (styles basic partial-completion)))))
+
+(use-package marginalia
+  :init (marginalia-mode 1))
+
+(use-package savehist                   ; remembered history ranks candidates
+  :ensure nil
+  :init (savehist-mode 1))
+
+(use-package consult
+  :bind (([remap switch-to-buffer] . consult-buffer)
+         ([remap yank-pop]         . consult-yank-pop)
+         ([remap goto-line]        . consult-goto-line)))
+
+(my/leader
+  "pf" '(consult-fd       :which-key "find files")
+  "ps" '(consult-ripgrep  :which-key "live grep")
+  "/"  '(consult-line     :which-key "search buffer")
+  "b"  '(consult-buffer   :which-key "buffers")
+  "pr" '(consult-recent-file :which-key "recent files"))
+
 ;;; Startup finished
 
 (setq gc-cons-threshold (* 16 1024 1024))
