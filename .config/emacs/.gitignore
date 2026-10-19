@@ -1,0 +1,7 @@
+elpa/
+eln-cache/
+custom.el
+*.eld
+auto-save-list/
+transient/
+*.elc
