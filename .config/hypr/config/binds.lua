@@ -56,6 +56,23 @@ end
 hl.bind(mainMod .. " + mouse:272", hl.dsp.window.drag())
 hl.bind(mainMod .. " + mouse:273", hl.dsp.window.resize())
 
+-- Resize with keyboard: SUPER + R enters resize mode, arrows/hjkl resize, Escape/Enter/R exits
+hl.bind(mainMod .. " + R", hl.dsp.submap("resize"))
+hl.define_submap("resize", function()
+    local step = 30
+    for key, delta in pairs({
+        right = { step, 0 }, l = { step, 0 },
+        left  = { -step, 0 }, h = { -step, 0 },
+        down  = { 0, step }, j = { 0, step },
+        up    = { 0, -step }, k = { 0, -step },
+    }) do
+        hl.bind(key, hl.dsp.window.resize({ x = delta[1], y = delta[2], relative = true }), { repeating = true })
+    end
+    hl.bind("escape", hl.dsp.submap("reset"))
+    hl.bind("Return", hl.dsp.submap("reset"))
+    hl.bind("R",      hl.dsp.submap("reset"))
+end)
+
 -- Zoom
 local function zoomfunction(value)
     local zoomvalue = hl.get_config("cursor:zoom_factor")
@@ -81,7 +98,7 @@ hl.bind(mainMod .. " + code:86", function() zoomfunction(0.3) end, { repeating =
 
 hl.bind(mainMod .. " + Return",     hl.dsp.exec_cmd(launchPrefix .. TERMINAL))
 hl.bind(mainMod .. " + E",          hl.dsp.exec_cmd(launchPrefix .. FILE_MANAGER))
-hl.bind(mainMod .. " + T",          hl.dsp.exec_cmd(launchPrefix .. EDITOR))
+hl.bind(mainMod .. " + T",          hl.dsp.exec_cmd(launchPrefix .. TERMINAL))
 hl.bind(mainMod .. " + C",          hl.dsp.exec_cmd(launchPrefix .. CALCULATOR))
 hl.bind("XF86Calculator",           hl.dsp.exec_cmd(launchPrefix .. CALCULATOR))
 hl.bind(mainMod .. " + W",          hl.dsp.exec_cmd(launchPrefix .. BROWSER))
