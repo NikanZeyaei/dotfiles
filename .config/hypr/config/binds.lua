@@ -108,6 +108,8 @@ hl.bind(mainMod .. " + X",          hl.dsp.exec_cmd(noctCall .. "panel-toggle co
 hl.bind(mainMod .. " + Space",      hl.dsp.exec_cmd(noctCall .. "panel-toggle launcher"))
 hl.bind(mainMod .. " + period",     hl.dsp.exec_cmd(noctCall .. "panel-toggle launcher /emo"))
 hl.bind(mainMod .. " + L",          hl.dsp.exec_cmd(noctCall .. "session lock"))
+-- Lid close: lock the session; logind (HandleLidSwitch=suspend, default) does the suspend
+hl.bind("switch:on:Lid Switch", hl.dsp.exec_cmd(noctCall .. "session lock"), { locked = true })
 hl.bind(mainMod .. " + ALT + C",    hl.dsp.exec_cmd(noctCall .. "panel-toggle session"))
 
 ---------------------------
