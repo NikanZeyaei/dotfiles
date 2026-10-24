@@ -17,6 +17,8 @@ end
 hl.bind(mainMod .. " + Escape",      hl.dsp.exec_cmd("hyprctl kill"))
 hl.bind(mainMod .. " + Q",           hl.dsp.window.close())
 hl.bind(mainMod .. " + ALT + Space", hl.dsp.window.float({ action = "toggle" }))
+-- Sticky: float (if tiled) + pin so the window follows you across workspaces; again to unpin & re-tile
+hl.bind(mainMod .. " + SHIFT + G", hl.dsp.exec_cmd([[sh -c 'd() { hyprctl dispatch "$1"; }; P="hl.dsp.window.pin({action=\"toggle\"})"; F="hl.dsp.window.float({action=\"toggle\"})"; w=$(hyprctl activewindow -j); fl=$(echo "$w" | jq .floating); if [ "$(echo "$w" | jq .pinned)" = true ]; then d "$P"; [ "$fl" = true ] && d "$F"; else [ "$fl" = true ] || d "$F"; d "$P"; fi']]))
 hl.bind(mainMod .. " + D",           hl.dsp.window.fullscreen({ mode = 1 }))
 hl.bind(mainMod .. " + F",           hl.dsp.window.fullscreen())
 hl.bind(mainMod .. " + J",           hl.dsp.layout("togglesplit"))
