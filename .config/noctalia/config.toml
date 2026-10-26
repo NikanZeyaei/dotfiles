@@ -4,7 +4,7 @@ ui_scale = 1.20
 [bar.default]
 center = [ "workspaces", "spacer_1", "active_window" ]
 concave_edge_corners = true
-end = [ "media", "spacer_1", "tray", "notifications", "network", "volume", "session" ]
+end = [ "media", "spacer_1", "tray", "notifications", "battery", "network", "volume", "session" ]
 margin_edge = 0
 margin_ends = 0
 position = "bottom"
@@ -142,3 +142,8 @@ inactive_pill_size = 1.0
 pill_scale = 0.80
 label_source = "id"
 show_labels = true
+
+[widget.battery]
+color = "secondary"
+display_mode = "graphic"
+label_content = "percent"
