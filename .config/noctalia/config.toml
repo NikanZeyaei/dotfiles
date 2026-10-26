@@ -147,3 +147,6 @@ show_labels = true
 color = "secondary"
 display_mode = "graphic"
 label_content = "percent"
+
+[wallpaper]
+enabled = false
